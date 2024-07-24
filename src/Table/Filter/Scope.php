@@ -71,7 +71,7 @@ class Scope implements Renderable
             return '<div class="dropdown-divider"></div>';
         }
 
-        $url = request()->fullUrlWithQuery([static::QUERY_NAME => $this->key]);
+        $url = request(null)->fullUrlWithQuery([static::QUERY_NAME => $this->key]);
 
         return "<a href=\"{$url}\" class='dropdown-item'>{$this->label}</a>";
     }
@@ -83,8 +83,8 @@ class Scope implements Renderable
      */
     public function asDefault()
     {
-        if (!request()->input('_scope_')) {
-            request()->merge(['_scope_' => $this->key]);
+        if (!request(null)->input('_scope_')) {
+            request(null)->merge(['_scope_' => $this->key]);
         }
 
         return $this;

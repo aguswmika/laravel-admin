@@ -33,6 +33,6 @@ trait HasResourceActions
      */
     public function destroy($id)
     {
-        return app(HandleController::class)->handleAction(request());
+        return app(HandleController::class)->handleAction(request(null));
     }
 }

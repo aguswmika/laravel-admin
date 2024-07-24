@@ -51,7 +51,7 @@ class Filter implements Renderable
      */
     public function getFormAction()
     {
-        $request = request();
+        $request = request(null);
 
         $query = $request->query();
         Arr::forget($query, [$this->getColumnName(), '_pjax']);

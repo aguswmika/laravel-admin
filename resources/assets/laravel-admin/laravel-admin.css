@@ -141,7 +141,7 @@ a.editable-empty {
 }
 
 .select2-dropdown .select2-search__field:focus, .select2-search--inline .select2-search__field:focus {
-    outline: none; !important;
+    outline: none !important;
     border: 1px solid #3c8dbc !important;
 }
 
@@ -200,4 +200,16 @@ a.editable-empty {
 
 .table tbody>tr.selected {
     background-color: #ffffd5 !important;
+}
+
+.nav-treeview{
+    padding: 0 0 0 10px !important;
+}
+
+body:not(.layout-fixed) .main-sidebar{
+    height: 100vh !important;
+}
+
+.wrapper .content-wrapper{
+    min-height: calc(100vh - calc(3rem + 1px) - calc(3rem + 1px)) !important;
 }

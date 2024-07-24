@@ -23,7 +23,7 @@ class Admin
      *
      * @var string
      */
-    const VERSION = '2.0.0 Beta 5';
+    const VERSION = '2.0.0';
 
     /**
      * @var Navbar
@@ -252,8 +252,8 @@ class Admin
      */
     public function disablePjax()
     {
-        if (request()->pjax()) {
-            request()->headers->set('X-PJAX', false);
+        if (request(null)->pjax()) {
+            request(null)->headers->set('X-PJAX', false);
         }
     }
 }

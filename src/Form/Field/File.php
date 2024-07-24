@@ -39,7 +39,7 @@ class File extends Field
      */
     public function getValidator(array $input)
     {
-        if (request()->has(static::FILE_DELETE_FLAG)) {
+        if (request(null)->has(static::FILE_DELETE_FLAG)) {
             return false;
         }
 
@@ -87,7 +87,7 @@ class File extends Field
             return parent::prepare($file);
         }
 
-        if (request()->has(static::FILE_DELETE_FLAG)) {
+        if (request(null)->has(static::FILE_DELETE_FLAG)) {
             return $this->destroy();
         }
 

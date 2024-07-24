@@ -80,7 +80,7 @@ class Tree implements Renderable
     {
         $this->model = $model;
 
-        $this->path = \request()->getPathInfo();
+        $this->path = \request(null)->getPathInfo();
         $this->elementId .= uniqid();
 
         $this->setupTools();

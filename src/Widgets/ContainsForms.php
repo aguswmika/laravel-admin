@@ -64,6 +64,6 @@ trait ContainsForms
     {
         $query = [$this->activeName => $name];
 
-        return request()->fullUrlWithQuery($query);
+        return request(null)->fullUrlWithQuery($query);
     }
 }

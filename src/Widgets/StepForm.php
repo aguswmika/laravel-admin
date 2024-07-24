@@ -72,7 +72,7 @@ class StepForm extends Form
     {
         $prev = session()->get('steps', []);
 
-        return array_merge($prev, [$this->current => request()->all()]);
+        return array_merge($prev, [$this->current => request(null)->all()]);
     }
 
     /**
@@ -123,7 +123,7 @@ class StepForm extends Form
     {
         parent::prepareForm();
 
-        $url = request()->url();
+        $url = request(null)->url();
 
         $this->hidden('_url')->default($url);
         $this->hidden('_current')->default($this->current);
@@ -148,7 +148,7 @@ class StepForm extends Form
 
         if ($index !== 0) {
             $step = $this->steps[$index - 1];
-            $prevUrl = request()->fullUrlWithQuery(compact('step'));
+            $prevUrl = request(null)->fullUrlWithQuery(compact('step'));
             $footer .= "<a href=\"{$prevUrl}\" class=\"btn btn-warning float-left\">{$trans['prev']}</a>";
         }
 
@@ -173,7 +173,7 @@ class StepForm extends Form
             ->setSteps(explode(',', request('_steps')));
 
         foreach (['_form_', '_token', '_url', '_current', '_steps'] as $key) {
-            request()->request->remove($key);
+            request(null)->request->remove($key);
         }
 
         return $this;

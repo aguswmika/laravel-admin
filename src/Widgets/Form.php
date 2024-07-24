@@ -208,7 +208,7 @@ class Form implements Renderable
     public function sanitize()
     {
         foreach (['_form_', '_token'] as $key) {
-            request()->request->remove($key);
+            request(null)->request->remove($key);
         }
 
         return $this;

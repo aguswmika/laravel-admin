@@ -208,9 +208,9 @@ trait ValidatesField
         // Default validation message.
         $messages = $this->validationMessages['default'] ?? [];
 
-        if (request()->isMethod('POST')) {
+        if (request(null)->isMethod('POST')) {
             $messages = $this->validationMessages['creation'] ?? $messages;
-        } elseif (request()->isMethod('PUT')) {
+        } elseif (request(null)->isMethod('PUT')) {
             $messages = $this->validationMessages['update'] ?? $messages;
         }
 
@@ -224,9 +224,9 @@ trait ValidatesField
      */
     protected function getRules()
     {
-        if (request()->isMethod('POST')) {
+        if (request(null)->isMethod('POST')) {
             $rules = $this->creationRules ?: $this->rules;
-        } elseif (request()->isMethod('PUT')) {
+        } elseif (request(null)->isMethod('PUT')) {
             $rules = $this->updateRules ?: $this->rules;
         } else {
             $rules = $this->rules;

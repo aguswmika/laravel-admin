@@ -72,7 +72,7 @@ trait CanExportTable
      */
     public function getExportUrl($scope = 1, $args = null)
     {
-        $input = array_merge(request()->all(), Exporter::formatExportQuery($scope, $args));
+        $input = array_merge(request(null)->all(), Exporter::formatExportQuery($scope, $args));
 
         if ($constraints = $this->model()->getConstraints()) {
             $input = array_merge($input, $constraints);

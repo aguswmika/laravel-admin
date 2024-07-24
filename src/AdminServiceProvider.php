@@ -29,6 +29,7 @@ class AdminServiceProvider extends ServiceProvider
         Console\ExportSeedCommand::class,
         Console\MinifyCommand::class,
         Console\FormCommand::class,
+        Console\PermissionCommand::class,
         Console\ActionCommand::class,
         Console\GenerateMenuCommand::class,
         Console\ConfigCommand::class,
@@ -42,6 +43,7 @@ class AdminServiceProvider extends ServiceProvider
     protected $routeMiddleware = [
         'admin.auth'       => Middleware\Authenticate::class,
         'admin.pjax'       => Middleware\Pjax::class,
+        'admin.permission' => Middleware\Permission::class,
         'admin.bootstrap'  => Middleware\Bootstrap::class,
         'admin.session'    => Middleware\Session::class,
         'admin.sul'        => Middleware\SingleUserLogin::class,
@@ -57,6 +59,7 @@ class AdminServiceProvider extends ServiceProvider
             'admin.auth',
             'admin.pjax',
             'admin.bootstrap',
+            'admin.permission',
             //'admin.session',
         ],
     ];

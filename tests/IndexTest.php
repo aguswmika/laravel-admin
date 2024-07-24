@@ -37,7 +37,13 @@ class IndexTest extends TestCase
         $this->visit('admin/')
             ->click('Users')
             ->seePageis('admin/auth/users')
+            ->click('Roles')
+            ->seePageis('admin/auth/roles')
+            ->click('Permission')
+            ->seePageis('admin/auth/permissions')
             ->click('Menu')
-            ->seePageis('admin/auth/menu');
+            ->seePageis('admin/auth/menu')
+            ->click('Operation log')
+            ->seePageis('admin/auth/logs');
     }
 }

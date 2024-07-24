@@ -13,7 +13,7 @@ trait HasResponse
      */
     protected function quickCreateResponse()
     {
-        if (request()->has('__quick_create')) {
+        if (request(null)->has('__quick_create')) {
             return response([
                 'status'    => true,
                 'message'   => trans('admin.save_succeeded'),
@@ -32,7 +32,7 @@ trait HasResponse
 
         /** @var Field $field */
         foreach ($this->fields() as $field) {
-            if (!request()->has($field->column())) {
+            if (!request(null)->has($field->column())) {
                 continue;
             }
 

@@ -40,7 +40,7 @@ class Paginator extends AbstractTool
         $this->paginator = $this->table->model()->eloquent();
 
         if ($this->paginator instanceof LengthAwarePaginator) {
-            $this->paginator->appends(request()->all());
+            $this->paginator->appends(request(null)->all());
         }
     }
 

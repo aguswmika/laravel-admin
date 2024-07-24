@@ -34,7 +34,7 @@
     $('.quick-create .create-form').submit(function (e) {
         e.preventDefault();
         $.ajax({
-            url: '{{ request()->url() }}',
+            url: '{{ request(null)->url() }}',
             type: 'POST',
             data: $(this).serialize(),
         }).done(function (data, textStatus, jqXHR) {

@@ -85,12 +85,12 @@ trait ExtendDisplay
         $this->searchable = true;
 
         $name = $this->getName();
-        $query = request()->query();
+        $query = request(null)->query();
 
         $this->prefix(function ($_, $original) use ($name, $query) {
             Arr::set($query, $name, $original);
 
-            $url = request()->fullUrlWithQuery($query);
+            $url = request(null)->fullUrlWithQuery($query);
 
             return "<a href=\"{$url}\"><i class=\"fa fa-search\"></i></a>";
         }, '&nbsp;&nbsp;');

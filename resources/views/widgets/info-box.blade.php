@@ -6,7 +6,7 @@
     <div class="icon">
         <i class="fa fa-{{ $icon }}"></i>
     </div>
-    <a href="{{ $link }}" class="small-card-footer">
+    <a href="{{ $link }}" class="small-box-footer">
         {{ admin_trans('admin.more') }}&nbsp;
         <i class="fa fa-arrow-circle-right"></i>
     </a>

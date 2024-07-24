@@ -41,7 +41,7 @@ class MultipleFile extends Field
      */
     public function getValidator(array $input)
     {
-        if (!request()->hasFile($this->column)) {
+        if (!request(null)->hasFile($this->column)) {
             return false;
         }
 
@@ -115,7 +115,7 @@ class MultipleFile extends Field
      */
     public function prepare($files)
     {
-        if (request()->has(static::FILE_DELETE_FLAG)) {
+        if (request(null)->has(static::FILE_DELETE_FLAG)) {
             if ($this->pathColumn) {
                 return $this->destroyFromHasMany(request(static::FILE_DELETE_FLAG));
             }
@@ -123,7 +123,7 @@ class MultipleFile extends Field
             return $this->destroy(request(static::FILE_DELETE_FLAG));
         }
 
-        if (is_string($files) && request()->has(static::FILE_SORT_FLAG)) {
+        if (is_string($files) && request(null)->has(static::FILE_SORT_FLAG)) {
             return $this->sortFiles($files);
         }
 

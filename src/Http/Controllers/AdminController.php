@@ -121,7 +121,7 @@ class AdminController extends Controller
      */
     public function renderModalForm($form, $content)
     {
-        if (!request()->has('_modal')) {
+        if (!request(null)->has('_modal')) {
             return $content->body($form);
         }
 

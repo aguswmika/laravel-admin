@@ -27,7 +27,9 @@ trait BuiltinRoutes
 
                 /* @var \Illuminate\Routing\Router $router */
                 $router->resource('auth/users', 'UserController')->names('auth_users');
-                $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('auth_menus');
+                $router->resource('auth/roles', 'RoleController')->names('auth_roles');
+                $router->resource('auth/permissions', 'PermissionController')->names('auth_permissions');
+                $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('auth_menu');
 
                 $router->post('_handle_form_', 'HandleController@handleForm')->name('handle_form');
                 $router->post('_handle_action_', 'HandleController@handleAction')->name('handle_action');

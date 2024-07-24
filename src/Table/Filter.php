@@ -297,7 +297,7 @@ class Filter implements Renderable
      */
     public function conditions()
     {
-        $inputs = Arr::dot(request()->all());
+        $inputs = Arr::dot(request(null)->all());
 
         $inputs = array_filter($inputs, function ($input) {
             return $input !== '' && !is_null($input);
@@ -612,7 +612,7 @@ class Filter implements Renderable
 
         $keys = (array) $keys;
 
-        $request = request();
+        $request = request(null);
 
         $query = $request->query();
         Arr::forget($query, $keys);

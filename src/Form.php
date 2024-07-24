@@ -240,7 +240,7 @@ class Form implements Renderable
      */
     public function store()
     {
-        $data = request()->all();
+        $data = request(null)->all();
 
         // Handle validation errors.
         if ($response = $this->validateErrorResponse($data)) {
@@ -352,7 +352,7 @@ class Form implements Renderable
      */
     public function update($id, $data = null)
     {
-        $data = ($data) ?: request()->all();
+        $data = ($data) ?: request(null)->all();
 
         $this->callEditing();
 
@@ -434,7 +434,7 @@ class Form implements Renderable
             unset($input['key']);
         }
 
-        request()->replace($input);
+        request(null)->replace($input);
 
         return $input;
     }
@@ -460,7 +460,7 @@ class Form implements Renderable
             $input[$column] = $order;
         }
 
-        request()->replace($input);
+        request(null)->replace($input);
 
         return $input;
     }
@@ -969,7 +969,7 @@ class Form implements Renderable
      */
     public function isCreating(): bool
     {
-        return Str::endsWith(request()->route()->getName(), ['.create', '.store']);
+        return Str::endsWith(request(null)->route()->getName(), ['.create', '.store']);
     }
 
     /**
@@ -979,7 +979,7 @@ class Form implements Renderable
      */
     public function isEditing(): bool
     {
-        return Str::endsWith(request()->route()->getName(), ['.edit', '.update']);
+        return Str::endsWith(request(null)->route()->getName(), ['.edit', '.update']);
     }
 
     /**
@@ -987,7 +987,7 @@ class Form implements Renderable
      */
     public function getResourceId()
     {
-        return current(request()->route()->parameters());
+        return current(request(null)->route()->parameters());
     }
 
     /**
@@ -1073,7 +1073,7 @@ class Form implements Renderable
      */
     public function resource($slice = -2): string
     {
-        $segments = explode('/', trim(request()->getUri(), '/'));
+        $segments = explode('/', trim(request(null)->getUri(), '/'));
 
         if ($slice !== 0) {
             $segments = array_slice($segments, 0, $slice);

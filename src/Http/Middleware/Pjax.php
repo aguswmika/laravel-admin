@@ -51,7 +51,7 @@ class Pjax
             return $response;
         };
 
-        (new static())->handle(\request(), $next)->send();
+        (new static())->handle(\request(null), $next)->send();
 
         exit;
     }

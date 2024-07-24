@@ -6,15 +6,19 @@ use Encore\Admin\Traits\DefaultDatetimeFormat;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Routing\Route;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 /**
  * Class Administrator.
+ *
+ * @property Role[] $roles
  */
 class Administrator extends Model implements AuthenticatableContract
 {
     use Authenticatable;
+    use HasPermissions;
     use DefaultDatetimeFormat;
 
     protected $fillable = ['username', 'password', 'name', 'avatar'];
@@ -44,7 +48,7 @@ class Administrator extends Model implements AuthenticatableContract
      */
     public function getAvatarAttribute($avatar)
     {
-        if (url()->isValidUrl($avatar)) {
+        if (URL::isValidUrl($avatar)) {
             return $avatar;
         }
 
@@ -60,26 +64,30 @@ class Administrator extends Model implements AuthenticatableContract
     }
 
     /**
-     * If User can see menu item.
+     * A user has and belongs to many roles.
      *
-     * @param Menu $menu
-     *
-     * @return bool
+     * @return BelongsToMany
      */
-    public function canSeeMenu($menu)
+    public function roles(): BelongsToMany
     {
-        return true;
+        $pivotTable = config('admin.database.role_users_table');
+
+        $relatedModel = config('admin.database.roles_model');
+
+        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'role_id');
     }
 
     /**
-     * If user can access route.
+     * A User has and belongs to many permissions.
      *
-     * @param Route $route
-     *
-     * @return bool
+     * @return BelongsToMany
      */
-    public function canAccessRoute(Route $route)
+    public function permissions(): BelongsToMany
     {
-        return true;
+        $pivotTable = config('admin.database.user_permissions_table');
+
+        $relatedModel = config('admin.database.permissions_model');
+
+        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'permission_id');
     }
 }

@@ -520,11 +520,11 @@ class Field implements Renderable
     /**
      * Set or get value of the field.
      *
-     * @param null $value
+     * @param mixed $value
      *
      * @return mixed
      */
-    public function value($value = null)
+    public function value(mixed $value = null)
     {
         if ($value === null) {
             return $this->value ?? $this->getDefault();

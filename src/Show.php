@@ -319,7 +319,7 @@ class Show implements Renderable
     public function getResourcePath()
     {
         if (empty($this->resource)) {
-            $path = request()->path();
+            $path = request(null)->path();
 
             $segments = explode('/', $path);
             array_pop($segments);

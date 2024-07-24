@@ -123,7 +123,7 @@ class Selector implements Renderable
      */
     public static function url($column, $value = null, $add = false)
     {
-        $query = request()->query();
+        $query = request(null)->query();
         $selected = static::parseSelected();
 
         $options = Arr::get($selected, $column, []);
@@ -131,7 +131,7 @@ class Selector implements Renderable
         if (is_null($value)) {
             Arr::forget($query, "_selector.{$column}");
 
-            return request()->fullUrlWithQuery($query);
+            return request(null)->fullUrlWithQuery($query);
         }
 
         if (in_array($value, $options)) {
@@ -150,7 +150,7 @@ class Selector implements Renderable
             Arr::forget($query, "_selector.{$column}");
         }
 
-        return request()->fullUrlWithQuery($query);
+        return request(null)->fullUrlWithQuery($query);
     }
 
     /**

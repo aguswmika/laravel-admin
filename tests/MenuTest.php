@@ -19,6 +19,8 @@ class MenuTest extends TestCase
             ->see('Index')
             ->see('Auth')
             ->see('Users')
+            ->see('Roles')
+            ->see('Permission')
             ->see('Menu');
     }
 

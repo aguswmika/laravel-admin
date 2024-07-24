@@ -6,7 +6,7 @@
         </a>
         <div class="dropdown-menu">
         @foreach($options as $option)
-        <a href="{!! request()->fullUrlWithQuery([$name => $option]) !!}" class="{{ $perpage == $option ? 'active' : '' }} dropdown-item">{{ $option }}</a>
+        <a href="{!! request(null)->fullUrlWithQuery([$name => $option]) !!}" class="{{ $perpage == $option ? 'active' : '' }} dropdown-item">{{ $option }}</a>
         @endforeach
         </div>
     </span>

@@ -46,6 +46,8 @@ class AuthTest extends TestCase
         $this
             ->see('<span>Admin</span>')
             ->see('<span>Users</span>')
+            ->see('<span>Roles</span>')
+            ->see('<span>Permission</span>')
             ->see('<span>Operation log</span>')
             ->see('<span>Menu</span>');
     }
