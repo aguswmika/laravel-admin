@@ -55,6 +55,10 @@ class Tools implements Renderable
         $this->default = new Collection();
         $this->appends = new Collection();
         $this->prepends = new Collection();
+
+        $this->addEdit()
+            ->addDelete()
+            ->addList();
     }
 
     /**
@@ -206,7 +210,7 @@ class Tools implements Renderable
     {
         $key = $this->show->getModel()->getKey();
 
-        return $this->getListPath().'/'.$key.'/edit';
+        return $this->getListPath() . '/' . $key . '/edit';
     }
 
     /**
@@ -218,7 +222,7 @@ class Tools implements Renderable
     {
         $key = $this->show->getModel()->getKey();
 
-        return $this->getListPath().'/'.$key;
+        return $this->getListPath() . '/' . $key;
     }
 
     /**
@@ -250,16 +254,12 @@ class Tools implements Renderable
      */
     public function render()
     {
-        $this->addEdit()
-            ->addDelete()
-            ->addList();
-
         $output = $this->renderCustomTools($this->prepends);
 
         foreach ($this->default as $tool) {
             $output .= $tool->render();
         }
 
-        return $output.$this->renderCustomTools($this->appends);
+        return $output . $this->renderCustomTools($this->appends);
     }
 }

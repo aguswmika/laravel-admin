@@ -30,6 +30,7 @@ trait BuiltinRoutes
                 $router->resource('auth/roles', 'RoleController')->names('auth_roles');
                 $router->resource('auth/permissions', 'PermissionController')->names('auth_permissions');
                 $router->resource('auth/menu', 'MenuController', ['except' => ['create']])->names('auth_menu');
+                $router->resource('auth/logs', 'LogController', ['only' => ['index', 'destroy']])->names('admin.auth.logs');
 
                 $router->post('_handle_form_', 'HandleController@handleForm')->name('handle_form');
                 $router->post('_handle_action_', 'HandleController@handleAction')->name('handle_action');

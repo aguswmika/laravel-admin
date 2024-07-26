@@ -7,6 +7,7 @@ use Encore\Admin\Layout\Content;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
@@ -42,9 +43,10 @@ class AdminServiceProvider extends ServiceProvider
      */
     protected $routeMiddleware = [
         'admin.auth'       => Middleware\Authenticate::class,
-        'admin.pjax'       => Middleware\Pjax::class,
-        'admin.permission' => Middleware\Permission::class,
         'admin.bootstrap'  => Middleware\Bootstrap::class,
+        'admin.log'        => Middleware\LogOperation::class,
+        'admin.permission' => Middleware\Permission::class,
+        'admin.pjax'       => Middleware\Pjax::class,
         'admin.session'    => Middleware\Session::class,
         'admin.sul'        => Middleware\SingleUserLogin::class,
     ];
@@ -57,9 +59,10 @@ class AdminServiceProvider extends ServiceProvider
     protected $middlewareGroups = [
         'admin' => [
             'admin.auth',
-            'admin.pjax',
             'admin.bootstrap',
+            'admin.log',
             'admin.permission',
+            'admin.pjax',
             //'admin.session',
         ],
     ];
@@ -71,7 +74,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'admin');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'admin');
 
         $this->ensureHttps();
 
@@ -141,7 +144,7 @@ PHP;
     protected function ensureHttps()
     {
         if (config('admin.https')) {
-            url()->forceScheme('https');
+            URL::forceScheme('https');
             $this->app['request']->server->set('HTTPS', true);
         }
     }
@@ -154,10 +157,10 @@ PHP;
     protected function registerPublishing()
     {
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__.'/../config' => config_path()], 'laravel-admin-config');
-            $this->publishes([__DIR__.'/../resources/lang' => resource_path('lang')], 'laravel-admin-lang');
-            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
-            $this->publishes([__DIR__.'/../resources/assets' => public_path('vendor/laravel-admin')], 'laravel-admin-assets');
+            $this->publishes([__DIR__ . '/../config' => config_path()], 'laravel-admin-config');
+            $this->publishes([__DIR__ . '/../resources/lang' => resource_path('lang')], 'laravel-admin-lang');
+            $this->publishes([__DIR__ . '/../database/migrations' => database_path('migrations')], 'laravel-admin-migrations');
+            $this->publishes([__DIR__ . '/../resources/assets' => public_path('vendor/laravel-admin')], 'laravel-admin-assets');
         }
     }
 
