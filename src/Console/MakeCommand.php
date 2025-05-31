@@ -120,7 +120,7 @@ class MakeCommand extends GeneratorCommand
     {
         $this->alert("laravel-admin controller code for model [{$modelName}]");
 
-        $this->info($this->generator->generateTable());
+        $this->info($this->generator->generateGrid());
         $this->info($this->generator->generateShow());
         $this->info($this->generator->generateForm());
     }
