@@ -164,7 +164,7 @@ class MakeCommand extends GeneratorCommand
                 $this->modelName,
                 $this->getTitle(),
                 class_basename($this->modelName),
-                $this->indentCodes($this->generator->generateTable()),
+                $this->indentCodes($this->generator->generateGrid()),
                 $this->indentCodes($this->generator->generateShow()),
                 $this->indentCodes($this->generator->generateForm()),
             ],
@@ -181,7 +181,7 @@ class MakeCommand extends GeneratorCommand
     {
         $indent = str_repeat(' ', 8);
 
-        return rtrim($indent.preg_replace("/\r\n/", "\r\n{$indent}", $code));
+        return rtrim($indent . preg_replace("/\r\n/", "\r\n{$indent}", $code));
     }
 
     /**
@@ -196,10 +196,10 @@ class MakeCommand extends GeneratorCommand
         }
 
         if ($this->modelName) {
-            return __DIR__.'/stubs/controller.stub';
+            return __DIR__ . '/stubs/controller.stub';
         }
 
-        return __DIR__.'/stubs/blank.stub';
+        return __DIR__ . '/stubs/blank.stub';
     }
 
     /**
