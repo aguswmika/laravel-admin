@@ -329,8 +329,10 @@ class Form implements Renderable
                 continue;
             }
 
-            if (method_exists($this->model, $column) ||
-                method_exists($this->model, $column = Str::camel($column))) {
+            if (
+                method_exists($this->model, $column) ||
+                method_exists($this->model, $column = Str::camel($column))
+            ) {
                 $relation = call_user_func([$this->model, $column]);
 
                 if ($relation instanceof Relations\Relation) {
@@ -601,7 +603,8 @@ class Form implements Renderable
     {
         foreach ((array) $columns as $column) {
             if ((!$containsDot && Str::contains($column, '.')) ||
-                ($containsDot && !Str::contains($column, '.'))) {
+                ($containsDot && !Str::contains($column, '.'))
+            ) {
                 return true;
             }
         }
@@ -804,12 +807,14 @@ class Form implements Renderable
             if (Str::contains($column, '.')) {
                 list($relation) = explode('.', $column);
 
-                if (method_exists($this->model, $relation) &&
+                if (
+                    method_exists($this->model, $relation) &&
                     $this->model->$relation() instanceof Relations\Relation
                 ) {
                     $relations[] = $relation;
                 }
-            } elseif (method_exists($this->model, $column) &&
+            } elseif (
+                method_exists($this->model, $column) &&
                 !method_exists(Model::class, $column)
             ) {
                 $relations[] = $column;
@@ -915,7 +920,7 @@ class Form implements Renderable
      *
      * @return $this
      */
-    public function row(Closure $callback = null)
+    public function row(?Closure $callback = null)
     {
         $this->rows[] = $this->currentRow = new Row($callback, $this);
 
@@ -953,7 +958,7 @@ class Form implements Renderable
      *
      * @return Form\Tools
      */
-    public function header(Closure $callback = null)
+    public function header(?Closure $callback = null)
     {
         if (func_num_args() === 0) {
             return $this->builder->getTools();
@@ -1055,7 +1060,7 @@ class Form implements Renderable
      *
      * @return \Encore\Admin\Form\Footer
      */
-    public function footer(Closure $callback = null)
+    public function footer(?Closure $callback = null)
     {
         if (func_num_args() === 0) {
             return $this->builder()->getFooter();
