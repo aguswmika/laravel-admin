@@ -100,8 +100,10 @@ class Tools implements Renderable
      */
     protected function addView()
     {
-        if (in_array('view', $this->defaultTools)) {
-            $this->default->put('view', new View($this->getViewPath()));
+        if ($this->form->isEditing()) {
+            if (in_array('view', $this->defaultTools)) {
+                $this->default->put('view', new View($this->getViewPath()));
+            }
         }
 
         return $this;
@@ -124,10 +126,12 @@ class Tools implements Renderable
      */
     protected function addDelete()
     {
-        if (in_array('delete', $this->defaultTools)) {
-            $action = new Delete($this->getListPath());
+        if ($this->form->isEditing()) {
+            if (in_array('delete', $this->defaultTools)) {
+                $action = new Delete($this->getListPath());
 
-            $this->default->put('delete', $action->setModel($this->form->getModel()));
+                $this->default->put('delete', $action->setModel($this->form->getModel()));
+            }
         }
 
         return $this;
@@ -223,7 +227,7 @@ class Tools implements Renderable
         $key = $this->form->getResourceId();
 
         if ($key) {
-            return $this->getListPath().'/'.$key;
+            return $this->getListPath() . '/' . $key;
         } else {
             return $this->getListPath();
         }
@@ -289,6 +293,6 @@ class Tools implements Renderable
             $output .= $tool->render();
         }
 
-        return $output.$this->renderCustomTools($this->appends);
+        return $output . $this->renderCustomTools($this->appends);
     }
 }
